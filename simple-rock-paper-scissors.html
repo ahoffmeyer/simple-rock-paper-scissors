@@ -1,0 +1,72 @@
+<html>
+    <body>       
+
+        <div id="flashmessage"></div>
+
+        <script type="text/javascript">
+            "use strict"            
+
+            var setUserInputs = function() {
+                var _userInput = prompt("Please enter your choice");
+                if (_userInput !== null) {
+                    if (_userInput !== "") {
+                        var _gameOptions = ["rock", "paper", "scissors"];
+                        for (var i = 0; i < _gameOptions.length; i++) {
+                            if (_gameOptions[i] == _userInput) return _userInput;
+                        }
+                    }
+                    return setUserInputs( prompt("Please enter your choice") );
+                } else return false;
+            };
+
+            var _userInput = setUserInputs();
+
+            var computerChoice = function () {
+                var _rand = Math.random();
+                if (_rand <= 0.33) {
+                    return "rock";
+                } else if (_rand <= 0.67) {
+                    return "paper";
+                } else {
+                    return "scissors";
+                }
+            };
+
+            var _compareObject = {
+                'rock': function(input) {
+                    if (input == "scissors") return true;
+                    else return false;
+                },
+                'paper': function(input) {
+                    if (input == "rock") return true;
+                    else return false;
+                },
+                'scissors': function(input) {
+                    if (input == "paper") return true;
+                    else return false;
+                }
+            };            
+            
+            var compareUserinputWithComputerChoice = function ( _input, cChoice ) {
+                if (_input !== false) {
+                    if (_input === cChoice) {
+                        document.getElementById("flashmessage").innerHTML = "It's a tie: " + cChoice +" == "+ _input;
+                        return compareUserinputWithComputerChoice( prompt("Please enter your choice"), computerChoice() );
+                    } else {
+                        if (_compareObject[cChoice](_input)) {
+                            document.getElementById("flashmessage").innerHTML = "Computer wins: " + cChoice +" > "+ _input; 
+                            return 1;                       
+                        } else {                        
+                            document.getElementById("flashmessage").innerHTML = "You win: " + _input +" > "+ cChoice;  
+                            return 1;
+                        }
+                    }
+                } else document.getElementById("flashmessage").innerHTML = "No choice made!";
+            };
+
+            if (setUserInputs !== false) compareUserinputWithComputerChoice( _userInput, computerChoice() );
+            
+            
+        </script>
+    </body>
+</html>
