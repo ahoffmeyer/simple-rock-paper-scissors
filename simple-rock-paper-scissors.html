@@ -8,9 +8,9 @@
 
             var setUserInputs = function() {
                 var _userInput = prompt("Please enter your choice");
+                var _gameOptions = ["rock", "paper", "scissors"];
                 if (_userInput !== null) {
                     if (_userInput !== "") {
-                        var _gameOptions = ["rock", "paper", "scissors"];
                         for (var i = 0; i < _gameOptions.length; i++) {
                             if (_gameOptions[i] == _userInput) return _userInput;
                         }
